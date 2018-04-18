@@ -1,0 +1,33 @@
+*{margin: 0; padding: 0;}
+a{text-decoration: none;}
+kbd{border: 1px solid red; width: 4em; height:4em; display: inline-block; 
+    text-transform: uppercase;
+    position: relative;}
+
+/*KBD里button的样式*/
+kbd > button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+/*button先隐藏，浮上去才会出现*/
+kbd:hover > button{
+    display: inline-block;
+}
+
+main{text-align: center;}
+
+/*把id=mianXXXX变成内联元素，在他爹main中加tac就可居中*/
+#mainXXXX{display: inline-block;}
+
+/*id=mainXXXX中的第二个div右移1em*/
+#mainXXXX > div:nth-child(2){
+    margin-left: 2em;
+}
+
+/*main中第三个div右移2em*/
+#mainXXXX > div:nth-child(3){
+    margin-left: 4em;
+}

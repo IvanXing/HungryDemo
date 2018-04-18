@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的导航</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="wrapper" id="mainXXXX">
+
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        var keys = {
+            '0': {0:'q', 1:'w', 2:'e', 3:'r', 4:'t', 5:'y', 6:'u', 7:'i', 8:'o', 9:'p', length: 10},
+            '1': {0:'a', 1:'s', 2:'d', 3:'f', 4:'g', 5:'h', 6:'j', 7:'k', 8:'l', length: 9},
+            '2': {0:'z', 1:'x', 2:'c', 3:'v', 4:'b', 5:'n', 6:'m', length: 7},
+            'length': 3
+        }
+        var hash = {
+            'q': 'qq.com',
+            'w': 'weibo.com', 
+            'e': 'ele.me', 
+            'r': 'renren.com', 
+            't': 'tianya.com', 
+            'y': 'youtube.com', 
+            'u': 'uc.com',
+            'i': 'iqiyi.com', 
+            'o': 'opera.me', 
+            'p': undefined, 
+            'a': 'acfun.tv', 
+            's': 'sohu.com', 
+            'z': 'zhihu.com', 
+            'm': 'www.mcdonalds.com', 
+        }
+
+
+
+        //取出localStorage中zzz对应的hash
+        //拿出来先是一个字符串，转成hash，若空，转换出错，加||'null'-->空字符串变成null
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        //本地hash存在，则覆盖原来的hash
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage
+        }
+
+
+
+       //遍历keys生成kbd标签 生成div div中生成kbd 两层循环
+        index = 0;
+        while(index < keys['length']){  // 0 1 2
+
+            //1.创建一个div元素
+             divXXXX = document.createElement('div')
+            //将x给id为y的标签，追加孩子
+             mainXXXX.appendChild(divXXXX)
+
+            //3.得到 0 1 2三个键盘数组，row里存放长度为 10 9 7的三个数组
+             row = keys[index]   
+
+
+
+            //2.每个div里row的长度个hi的kbd
+            index2 = 0
+            while(index2 < row['length']){  // 0-9  0-8 0-6
+                //kbd插入到div中
+                kbdXXXX = document.createElement('kbd')
+                //kbd中文字内容为hi
+                kbdXXXX.textContent = row[index2]
+
+                //kbd中插入button
+                buttonX = document.createElement('button')
+                buttonX.textContent = '编辑'
+                buttonX.id =  row[index2]
+                kbdXXXX.appendChild(buttonX)
+                //button点击事件  buttonX是个存折，只留着最后一个值
+                buttonX.onclick = function(xzkjcnxlkcjlk){
+                    key = xzkjcnxlkcjlk.target.id   // q w e r t
+                    x = prompt('给我一个网址')     //qq.com
+                    hash[key] = x     //hash变更
+                    localStorage.setItem('zzz', JSON.stringify(hash))  //hash转字符串才能传入LC
+                    console.log(hash)
+                }
+                //
+
+
+
+                divXXXX.appendChild(kbdXXXX)
+                index2 = index2 + 1
+            }
+            index = index + 1
+        }
+
+
+
+        //事件监听
+        document.onkeypress = function(xzkjcnxlkcjlk){
+            //用户按的什么键  乱七八糟是获得了所有信息，里面有key值
+            key = (xzkjcnxlkcjlk['key'])   // q w e r...
+            website = hash[key]
+            console.log(website)
+            //当前地址栏的地址复制website
+            location.href = 'http://' + website
+            //新开页面
+            window.open('http://' + website, '_blank')
+        }
+    </script>
+</body>
+</html>
